@@ -1,0 +1,98 @@
+/* Estilos gerais do header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 15vh; /* 15% da altura da viewport */
+    padding: 10px 20px;
+    background-color: #ffffff; /* Cor de fundo do header */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+  
+  /* Estilos para a navegação no header */
+  .header .nav {
+    flex: 3; /* Ocupa mais espaço para centralizar os links */
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .header .nav .link {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  
+  .header .nav .link:hover {
+    color: rgba(0, 0, 0, 0.3); /* Cor preta com 50% de opacidade no hover */
+  }
+  
+  /* Estilos para o lado direito do header */
+  .header .right {
+    flex: 1; 
+    text-align: right;
+  }
+  
+  /* Estilos para o ícone de perfil */
+  #profile-icon {
+    cursor: pointer; 
+    max-width: 3rem;
+    height: auto;
+    opacity: 0.5;
+  }
+  
+  /* Estilos para o menu dropdown */
+  #dropdown-profile {
+    flex-direction: row;
+    align-items: start;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  #dropdown-profile span {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+
+  #dropdown-profile button {
+    display: block;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  /* Estilos responsivos para dispositivos pequenos */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 10px;
+      height: auto; /* Redefine a altura para automático em dispositivos pequenos */
+    }
+  
+    .header .nav {
+      flex: initial; /* Redefine a flexibilidade para o tamanho inicial */
+      margin-top: 10px;
+      justify-content: space-between;
+    }
+  
+    .header .right {
+      text-align: center; /* Centraliza o conteúdo */
+      margin-top: 10px;
+    }
+  
+    #dropdown-profile {
+      position: relative; /* Volta ao posicionamento relativo */
+      top: auto;
+      right: auto;
+      width: 100%; /* Ocupa toda a largura disponível */
+      margin-top: 10px;
+    }
+  }
+  
