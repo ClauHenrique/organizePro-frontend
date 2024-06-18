@@ -19,13 +19,13 @@ export default function Home() {
     { 
       title: 'Tarefa 1', 
       status: 'Concluída', 
-      description: 'Descrição da Tarefa 1', 
+      description: 'Descrição da Tarefa 1 diewdj edejd e deiedj ededje9d9ejd e dejd9ed  e de dejd9edje9djed edje9dje9dj', 
       startDate: '01/06/2024' ,
       level: 3
     },
     { title: 'Tarefa 2', 
       status: 'Pendente', 
-      description: 'Descrição da Tarefa 2', 
+      description: 'Descrição da Tarefa 2 9ejd e dejd9ed  e de dejd9edje9djed edje9dje9dj',
       startDate: '05/06/2024',
       level: 4
     },
@@ -52,24 +52,33 @@ export default function Home() {
                 {expandedItem === index && (
                   <div className="task-expanded">
 
-                    <div className="task-content-left">
-                      <h3>{task.description}</h3>
-                      <PriorityLevel level={task.level} />
-                    </div>
-
-                    <div className="task-content-right">
-                      <div className="dates">
-                      <span>{task.startDate}</span>
-                      <br />
-                      a
-                      <br />
-                      <span>{task.startDate}</span>
+                    <div className="task-content-row-1">
+                      <div id='task-description'>
+                        <span className='task-labels'>Descrição</span>
+                        <p className='opaque-ft-70'>{task.description}</p>
                       </div>
 
-                      <select name="task-management">
-                        <option value="">Concluir tarfa</option>
-                        <option value="">Alterar tarefa</option>
-                        <option value="">apagar tarfa</option>
+                      <div id='dates'>
+                        <span className='task-labels'>Iniciar tarefa</span>
+                        <span className="opaque-ft-70">{task.startDate}</span>
+                        <span className='task-labels'>Concluir tarefa</span>
+                        <span className="opaque-ft-70">{task.startDate}</span>
+                      </div>
+                    </div>
+
+                    <div className="task-content-row-2">
+                      <div id="Priority-level">
+                      <span className='task-labels'>Prioridade da tarefa</span>
+                        <PriorityLevel 
+                          level={task.level}
+                        />
+                      </div>
+                     
+                      <select name="task-management" id='task-management'>
+                        <option className='opaque-ft-70' value="" disabled selected hidden>Gerenciar tarefa</option>
+                        <option className='opaque-ft-70' value="">Concluir tarfa</option>
+                        <option className='opaque-ft-70' value="">Alterar tarefa</option>
+                        <option className='opaque-ft-70' value="">apagar tarfa</option>
                       </select>
                     </div>
 

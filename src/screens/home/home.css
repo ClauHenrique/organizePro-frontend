@@ -1,4 +1,3 @@
-/* Estilos para a lista de tarefas */
 .task-list-container {
   width: 80%;
   margin: 20px auto;
@@ -53,12 +52,15 @@
   border-top: 1px solid #ddd;
 }
 
-.task-expanded {
+.task-content-row-1 {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.task-content-left {
+#task-description {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -67,11 +69,43 @@
   padding-right: 10px;
 }
 
-.task-content-right {
+#dates {
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end; 
   padding-left: 10px;
+}
+
+
+.task-content-row-2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#prioriry-level {
+  width: 50%;
+}
+
+#task-management {
+  width: 30%;
+  height: 2.3rem;
+  padding: 4px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Borda suave */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: #fff;
+}
+
+.task-labels {
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 200;
 }

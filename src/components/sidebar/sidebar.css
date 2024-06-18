@@ -33,6 +33,7 @@
   
 @media (max-width: 768px) {
     .sidebar {
+      position: relative;
       width: 100%;
       height: 13vh;
       flex-direction: row;
