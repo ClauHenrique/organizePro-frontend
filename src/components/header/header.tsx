@@ -1,70 +1,30 @@
-import { useState, useEffect, useRef } from 'react';
 import './header.css';
+import { Link } from 'react-router-dom'; // Supondo que você esteja usando react-router-dom para roteamento
 
-type HeaderProps = {
-  userName?: string;
-};
-
-export default function Header(props: HeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(event: any) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+export default function Header() {
 
   return (
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="#">
-            <img src="/public/logo.png" alt="Logo" id="icon" />
-            </a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Link</a>
-                </li>
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="#">Action</a></li>
-                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                    <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
-              </ul>
-              <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-success" type="submit">Search</button>
-              </form>
-            </div>
-          </div>
-        </nav>
-  )
+    <header className="header" id='header'>
+      <div className="left">
+        <Link to="/">
+          <img src="/public/logo.png" alt="Logo do OrganizePro" id="icon" />
+        </Link>
+      </div>
+
+      <nav className="nav">
+        <Link to="/sobre" className="header-links opaque-ft-50">Sobre</Link>
+        <Link to="/documentacao" className="header-links opaque-ft-50">Documentação</Link>
+        <a 
+          href="https://github.com/ClauHenrique/organizePro-backend" 
+          className="header-links opaque-ft-50"
+          target='_blank'
+          rel="noopener noreferrer"
+        >GitHub</a>
+      </nav>
+
+      <div className="right">
+        <Link to="/login" className="header-links opaque-ft-50">Login</Link>
+      </div>
+    </header>
+  );
 }

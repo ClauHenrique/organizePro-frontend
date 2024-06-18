@@ -1,0 +1,54 @@
+#priority-level, #levels {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+#level-icon {
+    width: 40px;
+    height: 40px;
+}
+
+#levels {
+    margin-left: 4px;
+    padding: 4px;
+    border: 1px solid #ddd; /* Borda suave */
+    border-radius: 5px;
+}
+
+#level-1 {
+    width: 12px;
+    height: 12px; /* Exemplo de altura para o nível 1 */
+    margin-left: 4px;
+    border: 1px solid #ddd; /* Borda suave */
+    background: #a3d9a3;
+}
+
+#level-2 {
+    width: 12px;
+    height: 14px; /* Exemplo de altura para o nível 2 */
+    margin-left: 4px;
+    border: 1px solid #ddd; /* Borda suave */
+}
+
+#level-3 {
+    width: 12px;
+    height: 16px; /* Exemplo de altura para o nível 3 */
+    margin-left: 4px;
+    border: 1px solid #ddd; /* Borda suave */
+}
+
+#level-4 {
+    width: 12px;
+    height: 18px; /* Exemplo de altura para o nível 4 */
+    margin-left: 4px;
+    border: 1px solid #ddd; /* Borda suave */
+}
+
+#level-5 {
+    width: 12px;
+    height: 20px; /* Exemplo de altura para o nível 5 */
+    margin-left: 4px;
+    border: 1px solid #ddd; /* Borda suave */
+}

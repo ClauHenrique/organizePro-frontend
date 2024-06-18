@@ -2,17 +2,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-
-body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #fff;
-  margin: 0;
-  padding: 0;
 }
 
-.opaque-ft {
-  color: rgba(0, 0, 0, 0.50); /* Cor preta com 20% de opacidade */
+/* opacidade das fontes */
+.opaque-ft-50 {
+  color: rgba(0, 0, 0, 0.50);
+}
+
+.opaque-ft-70 {
+  color: rgba(0, 0, 0, 0.70);
+}
+
+
+/* peso das fontes */
+.ft-weight-600 {
+  font-weight: 600;
 }

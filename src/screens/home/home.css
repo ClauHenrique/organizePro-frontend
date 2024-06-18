@@ -1,0 +1,77 @@
+/* Estilos para a lista de tarefas */
+.task-list-container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd; /* Borda suave */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.task-list-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.header-text-left {
+  text-align: left;
+}
+
+.header-text-right {
+  text-align: right;
+}
+
+#header-divider {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-top: 2px solid rgba(0, 0, 0, 0.20);
+}
+
+.task-list {
+  margin-top: 10px;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.task-item:hover {
+  background-color: #d8d8d898;
+  padding: 5px;
+  transition: 0.2s;
+}
+
+.task-divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.task-expanded {
+  display: flex;
+  flex-direction: row;
+}
+
+.task-content-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-right: 10px;
+}
+
+.task-content-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end; 
+  padding-left: 10px;
+}
