@@ -5,7 +5,7 @@ type priority = {
     level: number
 }
 
-export default function PriorityLevel(pros: priority) {
+export default function PriorityLevel(props: priority) {
 
     const defineLevel = () => {
 
@@ -17,7 +17,7 @@ export default function PriorityLevel(pros: priority) {
             '#ff6666',
         ]
         
-        for (let i = 1; i <= pros.level; i++) {
+        for (let i = 1; i <= props.level; i++) {
            let elem = document.getElementById(`level-${i}`)
            if (elem) { 
             elem.style.background = levelIntensity[i -1]
