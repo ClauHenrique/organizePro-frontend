@@ -1,10 +1,9 @@
 import './mesage.css'
 
-export default function LoginError(props: {msgs: string[]}) {
-    console.log("AAAAA: ", props.msgs);
+export default function MsgError(props: {msgs: string[]}) {
     
      return (
-        <div id='login-error'>
+        <div id='msg-error'>
             {props.msgs.map((msg, index) => (
                 <p key={index}>{msg}</p>
             ))}

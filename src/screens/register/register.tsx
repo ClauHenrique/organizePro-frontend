@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import './register.css';
 import { useState } from 'react';
-import LoginError from '../../components/mesages/login-error';
+import MsgError from '../../components/mesages/msg-error';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -68,7 +68,7 @@ export default function Register() {
             <div className="login-container">
                 <div className="login-card">
                     <h2>Cadastro</h2>
-                    {showErrorMsg && <LoginError msgs={errorMsg} />}
+                    {showErrorMsg && <MsgError msgs={errorMsg} />}
                     <label htmlFor="name">Nome</label>
                     <input
                         type="text"

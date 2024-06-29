@@ -1,11 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/sidebar";
-import './home.css'; // Importe o arquivo CSS com os estilos da página
 import PriorityLevel from '../../components/priority-level/priorityLevel';
+import { getTaskService } from '../../services/task.service';
+import './home.css';
+import MsgError from '../../components/mesages/msg-error';
 
 export default function Home() {
+
+  const task = [
+    { 
+      title: '', 
+      status: '', 
+      description: '', 
+      startDate: '' ,
+      endDate: '',
+      level: 3
+    }
+  ];
+
+  const [showErrorMsg, SetshowErrorMsg] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [expandedItem, setExpandedItem] = useState(null);
+  const [tasks, setTasks] = useState(task);
 
   const toggleExpand = (index: any) => {
     if (expandedItem === index) {
@@ -15,26 +32,43 @@ export default function Home() {
     }
   };
 
-  const tasks = [
-    { 
-      title: 'Tarefa 1', 
-      status: 'Concluída', 
-      description: 'Descrição da Tarefa 1 diewdj edejd e deiedj ededje9d9ejd e dejd9ed  e de dejd9edje9djed edje9dje9dj', 
-      startDate: '01/06/2024' ,
-      level: 3
-    },
-    { title: 'Tarefa 2', 
-      status: 'Pendente', 
-      description: 'Descrição da Tarefa 2 9ejd e dejd9ed  e de dejd9edje9djed edje9dje9dj',
-      startDate: '05/06/2024',
-      level: 4
-    },
-  ];
+
+  const getTasks = async () => {
+      try {
+
+        let token = localStorage.getItem('token')
+
+        let {data} = await getTaskService(token)
+
+        data.map((ele: any) => {
+          ele.startDate = new Date(ele.startDate).toLocaleString()
+          ele.endDate = new Date(ele.endDate).toLocaleString()
+
+        })
+
+        setTasks(data)
+        
+      } catch (error) {
+
+        setErrorMsg("Estamos com algum erro no servidor. Não foi possivel obter as tarefas!")
+        SetshowErrorMsg(true)
+      }
+  }
+
+  useEffect(() => {
+      getTasks()
+  }, [])
+
 
   return (
     <div className="page-container">
       <Header />
       <Sidebar />
+
+      {
+          showErrorMsg? <MsgError msgs={[errorMsg]} /> : null
+      }
+                
       <div className="main-content">
         <div className="task-list-container">
           <div className="task-list-header">

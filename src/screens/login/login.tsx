@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import './login.css';
 import {authService} from '../../services/user-service';
 import { useState } from 'react';
-import LoginError from '../../components/mesages/login-error';
+import MsgError from '../../components/mesages/msg-error';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -63,7 +63,7 @@ export default function Login() {
             <div className="login-card">
                 <h2>Login</h2>
                 {
-                    showErrorMsg? <LoginError msgs={[errorMsg]} /> : null
+                    showErrorMsg? <MsgError msgs={[errorMsg]} /> : null
                 }
                 <label htmlFor="email">Email</label>
                 <input
