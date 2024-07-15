@@ -8,3 +8,13 @@ export async function getTaskService(token: string | any) {
         }
     })
 }
+
+export async function createTask(task: Task, token: string | any) {
+    return await api.post('/task', 
+        task,
+        {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
