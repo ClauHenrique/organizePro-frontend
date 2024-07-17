@@ -5,8 +5,6 @@ import  { Header, PriorityLevel, MsgError, NoContent, Footer } from '../importCo
 
 export default function Home() {
 
-  console.info(import.meta.env.VITE_API_URL)
-
   const task = [
     { 
       title: '', 
