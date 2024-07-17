@@ -23,7 +23,7 @@ export default function Header() {
     <header className="header" id='header'>
       <div className="left">
         <Link to="/">
-          <img src="/public/logo.png" alt="Logo do OrganizePro" id="icon" />
+          <img src="/logo.png" alt="Logo do OrganizePro" id="icon" />
         </Link>
       </div>
 
