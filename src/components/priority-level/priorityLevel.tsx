@@ -32,7 +32,7 @@ export default function PriorityLevel(props: priority) {
     return (
         <div id="priority-level">
             <div id="level-icon-circle">
-            <img src="/public/level.png" alt="Logo do OrganizePro" id="level-icon" />
+            <img src="/level.png" alt="Logo do OrganizePro" id="level-icon" />
             </div>
             <div id="levels">
                 <div id="level-1"></div>

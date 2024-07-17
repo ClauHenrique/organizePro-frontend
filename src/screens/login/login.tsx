@@ -39,6 +39,8 @@ export default function Login() {
 
             const req = await authService({email, password})
 
+            console.info(">>>", req)
+
             if (req.status == 200) {
                 SetshowErrorMsg(false)
                 localStorage.setItem('token', req.data.access_token);
