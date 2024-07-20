@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './taskForm.css';
-import { Header, Footer, MsgError } from '../importComponents';
+import { Header, Footer, TimeConflict } from '../importComponents';
 import { createTask } from '../../services/task.service';
 import MsgSucess from '../../components/mesages/msgSuccess';
 
@@ -13,63 +13,64 @@ export default function TaskForm() {
     const [showMsgError, setshowMsgError] = useState(false);
     const [showMsgSucess, setshowMsgSucess] = useState(false);
 
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        let token = localStorage.getItem('token')
+        const newTask = { 
+            title, 
+            description, 
+            startDate, 
+            endDate, 
+            priority, 
+            };
+        localStorage.setItem('newTask', JSON.stringify(newTask));
+
+        let token = localStorage.getItem('token');
         
         try {
+            
             const create = await createTask({
                 title,
                 description,
-                startDate, 
+                startDate,
                 endDate,
                 priority
             },
-        token
-        )
-        console.log(create);
-        
+            token
+            );
 
-        if (create.status == 201) {
+            if (create.status === 201) {
+                setTimeout(() => {
+                    setshowMsgSucess(false);
+                }, 3000);
 
-            setTimeout(() => {
-                setshowMsgSucess(false)
-            }, 3000)
-
-            setshowMsgError(false)
-            setshowMsgSucess(true)
-            window.scrollTo(0,0)
-        }
+                setshowMsgError(false);
+                setshowMsgSucess(true);
+                window.scrollTo(0, 0);
+            }
 
         } catch (error: any) {
-
-            if (error.response.status == 409) {
-                setshowMsgError(true)   
+            if (error.response.status === 409) {
+                setshowMsgError(true);
             }
             
-            window.scrollTo(0, 0)
+            window.scrollTo(0, 0);
         }
-
     };
 
     return (
         <div>
             <Header />
 
-            {
-                showMsgError? 
-                    <MsgError msgs={[
-                        `A tarefa que você está tentando cadastrar, 
-                        está em conflito com o horario um tarefa já agendada`
-                    ]}/> 
-                    : null
-            }
+            {showMsgError ? (
+                <TimeConflict
+                    msg={
+                        `A tarefa que você está tentando cadastrar está em conflito com o horário de uma tarefa já agendada`
+                    }
+                />
+            ) : null}
 
-            {
-                showMsgSucess? <MsgSucess msg="Tarefa Cadastrada" /> : null
-            }
+            {showMsgSucess ? <MsgSucess msg="Tarefa Cadastrada" /> : null}
 
             <div className="task-form-container">
                 <form className="task-form" onSubmit={handleSubmit}>
@@ -89,9 +90,10 @@ export default function TaskForm() {
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
+
                     <label htmlFor="startDate">Início da Tarefa</label>
                     <input
-                        type="date"
+                        type="datetime-local"
                         id="start-date"
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
@@ -100,7 +102,7 @@ export default function TaskForm() {
 
                     <label htmlFor="endDate">Término da Tarefa</label>
                     <input
-                        type="date"
+                        type="datetime-local"
                         id="end-date"
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}

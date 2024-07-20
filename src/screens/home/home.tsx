@@ -111,7 +111,7 @@ export default function Home() {
                               <span className='task-labels'>Iniciar tarefa</span>
                               <span className="opaque-ft-70">{task.startDate}</span>
                               <span className='task-labels'>Concluir tarefa</span>
-                              <span className="opaque-ft-70">{task.startDate}</span>
+                              <span className="opaque-ft-70">{task.endDate}</span>
                             </div>
                           </div>
 

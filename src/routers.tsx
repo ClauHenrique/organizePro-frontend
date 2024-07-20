@@ -4,6 +4,7 @@ import About from './screens/about';
 import Login from './screens/login/login';
 import Register from './screens/register/register';
 import TaskForm from './screens/task-form/taskForm';
+import ManageConflicts from './screens/manage-conflicts/manageConflicts';
 
 // import Documentacao from './Documentacao';
 // import Login from './Login';
@@ -17,6 +18,7 @@ export default function AppRoutes() {
         <Route path="/create-account" element={<Register />} />
         <Route path="/task-form" element={<TaskForm />} />        
         <Route path="/sobre" element={<About />} />
+        <Route path="/manage-conflicts" element={<ManageConflicts />} />
       </Routes>
     </Router>
   );
