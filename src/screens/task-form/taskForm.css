@@ -1,5 +1,6 @@
 .task-form-container {
     margin: 20px auto;
+    /* height: 100vh; */
     width: 50%;
     background-color: #f8f9fa;
 }
@@ -40,17 +41,6 @@
     resize: none;
 }
 
-.date-time-inputs {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.date-input,
-.time-input {
-    width: 48%; /* Distribui os inputs de data e hora lado a lado */
-}
-
 .task-form-button {
     width: 100%;
     padding: 0.75rem;
@@ -68,21 +58,9 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-/* Media query para telas menores */
+/* Media query for smaller screens */
 @media (max-width: 768px) {
-
-    .task-form-container {
-        margin: 20px auto;
+    .task-form {
         width: 90%;
-        background-color: #f8f9fa;
-    }
-
-    .date-time-inputs {
-        flex-direction: column;
-    }
-
-    .date-input,
-    .time-input {
-        width: 100%; /* Para telas menores, os inputs ocupam toda a largura */
     }
 }

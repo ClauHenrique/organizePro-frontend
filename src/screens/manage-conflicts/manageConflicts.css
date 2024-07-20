@@ -1,3 +1,7 @@
+.main-manage-conflict {
+    min-height: 100vh;
+}
+
 .manage-conflicts-container {
     display: flex;
     flex-direction: column;
@@ -31,11 +35,13 @@
 } 
 
 #title-new-task {
-    width: 10%;
+    /* width: 70%; */
+    margin: auto;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.20);
     font-weight: 200;
+    margin-bottom: 20px;
   }
 
 .task-card h2 {
@@ -44,4 +50,115 @@
 
 .task-card p {
     margin: 5px 0;
+}
+
+
+/* CSS para o Modal */
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    outline: none;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-form-container {
+    margin: 20px auto;
+    width: 100%;
+}
+  
+#modal-form {
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+  
+#modal-form h2 {
+text-align: left;
+margin-bottom: 1rem;
+}
+  
+#modal-form label {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+  
+#modal-form input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+
+#date-time-inputs-modal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 1rem;
+}
+  
+.modal-date-input{
+    width: 48%;
+}
+  
+#form-button-modal {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+  
+#form-button-modal:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  
+
+@media (max-width: 768px) {
+
+#modal-form-container {
+    margin: 20px auto;
+    width: 90%;
+    background-color: #f8f9fa;
+}
+
+#date-time-inputs-modal {
+    flex-direction: column;
+}
+
+.modal-date-input{
+    width: 100%;
+}
 }

@@ -18,3 +18,13 @@ export async function createTask(task: Task, token: string | any) {
         }
     })
 }
+
+export async function updateTask(task: Task, id: string, token: string | any) {
+    return await api.patch(`/task/${id}`, 
+        task,
+        {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}

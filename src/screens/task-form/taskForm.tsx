@@ -8,9 +8,7 @@ export default function TaskForm() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [startDate, setStartDate] = useState('');
-    const [startTime, setStartTime] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [endTime, setEndTime] = useState('');
     const [priority, setPriority] = useState(1);
     const [showMsgError, setshowMsgError] = useState(false);
     const [showMsgSucess, setshowMsgSucess] = useState(false);
@@ -18,7 +16,13 @@ export default function TaskForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const newTask = { title, description, startDate, endDate, priority, status: 'Pendente' };
+        const newTask = { 
+            title, 
+            description, 
+            startDate, 
+            endDate, 
+            priority, 
+            };
         localStorage.setItem('newTask', JSON.stringify(newTask));
 
         let token = localStorage.getItem('token');
@@ -28,8 +32,8 @@ export default function TaskForm() {
             const create = await createTask({
                 title,
                 description,
-                startDate: `${startDate}T${startTime}`,
-                endDate: `${endDate}T${endTime}`,
+                startDate,
+                endDate,
                 priority
             },
             token
@@ -86,51 +90,24 @@ export default function TaskForm() {
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
-                    <div className="date-time-inputs">
-                        <div className="date-input">
-                            <label htmlFor="startDate">Início da Tarefa</label>
-                            <input
-                                type="date"
-                                id="start-date"
-                                value={startDate}
-                                onChange={(e) => setStartDate(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="time-input">
-                            <label htmlFor="startTime">Horário de Início</label>
-                            <input
-                                type="time"
-                                id="start-time"
-                                value={startTime}
-                                onChange={(e) => setStartTime(e.target.value)}
-                                required
-                            />
-                        </div>
-                    </div>
 
-                    <div className="date-time-inputs">
-                        <div className="date-input">
-                            <label htmlFor="endDate">Término da Tarefa</label>
-                            <input
-                                type="date"
-                                id="end-date"
-                                value={endDate}
-                                onChange={(e) => setEndDate(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="time-input">
-                            <label htmlFor="endTime">Horário de Término</label>
-                            <input
-                                type="time"
-                                id="end-time"
-                                value={endTime}
-                                onChange={(e) => setEndTime(e.target.value)}
-                                required
-                            />
-                        </div>
-                    </div>
+                    <label htmlFor="startDate">Início da Tarefa</label>
+                    <input
+                        type="datetime-local"
+                        id="start-date"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                        required
+                    />
+
+                    <label htmlFor="endDate">Término da Tarefa</label>
+                    <input
+                        type="datetime-local"
+                        id="end-date"
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                        required
+                    />
 
                     <label htmlFor="priority">Nível de Prioridade</label>
                     <select
