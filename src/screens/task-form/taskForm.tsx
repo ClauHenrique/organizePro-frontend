@@ -18,6 +18,9 @@ export default function TaskForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        const newTask = { title, description, startDate, endDate, priority, status: 'Pendente' };
+        localStorage.setItem('newTask', JSON.stringify(newTask));
+
         let token = localStorage.getItem('token');
         
         try {

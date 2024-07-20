@@ -26,3 +26,8 @@
 .ft-weight-600 {
   font-weight: 600;
 }
+
+/* estilização para links */
+.link {
+  text-decoration: none;
+}
