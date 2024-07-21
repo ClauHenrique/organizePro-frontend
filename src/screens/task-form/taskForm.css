@@ -1,7 +1,7 @@
 .task-form-container {
     margin: 20px auto;
     /* height: 100vh; */
-    width: 50%;
+    width: 60%;
     background-color: #f8f9fa;
 }
 
@@ -60,7 +60,7 @@
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
-    .task-form {
+    .task-form-container {
         width: 90%;
     }
 }
