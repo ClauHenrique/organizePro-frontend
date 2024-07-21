@@ -57,6 +57,12 @@
     align-items: center;
     justify-content: center;
   }
+
+  #icon {
+    width: 200px;
+    height: auto;
+  }
+
   .nav, .right {
     width: 100%;
     display: flex;
