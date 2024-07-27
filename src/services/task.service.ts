@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { Task } from "./types/tasks";
+import { Task, UpdateTaskStatus } from "./types/tasks";
 
 export async function getTaskService(token: string | any) {
     return await api.get('/task', {
@@ -8,6 +8,17 @@ export async function getTaskService(token: string | any) {
         }
     })
 }
+
+
+export async function getOneTaskService(token: string | any, taskId: string) {
+    return await api.get(`/task/${taskId}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
+
+
 
 export async function createTask(task: Task, token: string | any) {
     return await api.post('/task', 
@@ -19,7 +30,7 @@ export async function createTask(task: Task, token: string | any) {
     })
 }
 
-export async function updateTask(task: Task, id: string, token: string | any) {
+export async function updateTask(task: Task | null, id: string | any, token: string | any) {
     return await api.patch(`/task/${id}`, 
         task,
         {
@@ -27,4 +38,14 @@ export async function updateTask(task: Task, id: string, token: string | any) {
             'Authorization': `Bearer ${token}`
         }
     })
+}
+
+    export async function updateTaskStatus(status: UpdateTaskStatus, id: string, token: string | any) {
+        return await api.patch(`/task/${id}`, 
+            status,
+            {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 }

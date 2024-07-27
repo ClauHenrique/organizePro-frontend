@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
-import { getTaskService } from '../../services/task.service';
+import { getTaskService, updateTaskStatus } from '../../services/task.service';
 import './home.css';
 import  { Header, PriorityLevel, MsgError, NoContent, Footer } from '../importComponents';
+import { TaskStatus } from '../../services/types/tasks';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
 
+  let token = localStorage.getItem('token')
+
   const task = [
     { 
+      _id: '',
       title: '', 
       status: '', 
       description: '', 
@@ -21,6 +26,8 @@ export default function Home() {
   const [errorMsg, setErrorMsg] = useState("");
   const [expandedItem, setExpandedItem] = useState(null);
   const [tasks, setTasks] = useState(task);
+  const navigate = useNavigate()
+
 
   const toggleExpand = (index: any) => {
     if (expandedItem === index) {
@@ -33,9 +40,6 @@ export default function Home() {
 
   const getTasks = async () => {
       try {
-
-        let token = localStorage.getItem('token')
-        
 
         if (token) {
 
@@ -70,6 +74,41 @@ export default function Home() {
           SetshowErrorMsg(true)
         }
       }
+  }
+
+  const taskManagement = async (id: string, event: any) => {
+    try {
+
+      const newStatus = event.target.value;
+
+      switch (newStatus) {
+        case TaskStatus.FAZENDO:
+          await updateTaskStatus(
+            {status: TaskStatus.FAZENDO},
+             id,
+             token
+            )
+            window.location.reload()
+          break;
+        
+        case TaskStatus.CONCLUIDA:
+          await updateTaskStatus(
+            {status: TaskStatus.CONCLUIDA},
+            id,
+              token
+            )
+            window.location.reload()
+          break;
+
+        case 'modificar':
+          localStorage.setItem('idTaskUpdate', JSON.stringify(id));
+          navigate('/update-task')
+      }
+
+
+    } catch (error) {
+      
+    }
   }
 
   useEffect(() => {
@@ -131,11 +170,15 @@ export default function Home() {
                               />
                             </div>
                           
-                            <select name="task-management" id='task-management'>
+                            <select 
+                              name="task-management" id='task-management' 
+                              onChange={(event) => 
+                                taskManagement(task._id, event)}>
                               <option className='opaque-ft-70' value="" disabled selected hidden>Gerenciar tarefa</option>
-                              <option className='opaque-ft-70' value="">Concluir tarfa</option>
-                              <option className='opaque-ft-70' value="">Alterar tarefa</option>
-                              <option className='opaque-ft-70' value="">apagar tarfa</option>
+                              <option className='opaque-ft-70' value="fazendo">Marcar como iniciada</option>
+                              <option className='opaque-ft-70' value="concluida">Marcar como concluida</option>
+                              <option className='opaque-ft-70' value="modificar">Modificar tarefa</option>
+                              <option className='opaque-ft-70' value="apagar">Apagar tarfa</option>
                             </select>
                           </div>
 
