@@ -48,6 +48,7 @@ export default function Home() {
               ele.startDate = new Date(ele.startDate).toLocaleString()
               ele.endDate = new Date(ele.endDate).toLocaleString()
             })
+            
   
             setTasks(data) 
           } 
@@ -57,10 +58,17 @@ export default function Home() {
           setShowNoContent(true)
         }
         
-      } catch (error) {
+      } catch (error: any) {
 
-        setErrorMsg("Estamos com algum erro no servidor. Não foi possivel obter as tarefas!")
-        SetshowErrorMsg(true)
+        if (error.response.status == 401) {
+          localStorage.removeItem('token')
+        }
+
+        else {
+
+          setErrorMsg("Estamos com algum erro no servidor. Não foi possivel obter as tarefas!")
+          SetshowErrorMsg(true)
+        }
       }
   }
 
@@ -85,40 +93,40 @@ export default function Home() {
             :
                   
             <div>
-              <div className="task-list-container">
-                <div className="task-list-header">
-                  <div className="header-text-left">Tarefas cadastradas</div>
-                  <div className="header-text-right">Status</div>
+              <div id='task-list-container-home'>
+                <div id="task-list-header">
+                  <div id="header-text-left">Tarefas cadastradas</div>
+                  <div id="header-text-right">Status</div>
                 </div>
-                <hr className="header-divider" />
+                <hr id="header-divider" />
                 <div className="task-list">
                   {tasks.map((task, index) => (
                     <div key={index}>
                       <div className="task-item" onClick={() => toggleExpand(index)}>
-                        <div className="task-title">{task.title}</div>
-                        <div className="task-status">{task.status}</div>
+                        <div className="opaque-ft-70">{task.title}</div>
+                        <div className="opaque-ft-70">{task.status}</div>
                       </div>
                       {expandedItem === index && (
-                        <div className="task-expanded">
+                        <div>
 
-                          <div className="task-content-row-1">
+                          <div className="task-content-row">
                             <div id='task-description'>
                               <span className='task-labels'>Descrição</span>
-                              <p className='opaque-ft-70'>{task.description}</p>
+                              <p className='opaque-ft-70 task-content'>{task.description}</p>
                             </div>
 
                             <div id='dates'>
                               <span className='task-labels'>Iniciar tarefa</span>
-                              <span className="opaque-ft-70">{task.startDate}</span>
+                              <span className="opaque-ft-70 task-content">{task.startDate}</span>
                               <span className='task-labels'>Concluir tarefa</span>
-                              <span className="opaque-ft-70">{task.endDate}</span>
+                              <span className="opaque-ft-70 task-content">{task.endDate}</span>
                             </div>
                           </div>
 
-                          <div className="task-content-row-2">
-                            <div id="Priority-level">
+                          <div className="task-content-row">
+                            <div className="priority-level">
                             <span className='task-labels'>Prioridade da tarefa</span>
-                              <PriorityLevel 
+                              <PriorityLevel
                                 level={task.priority}
                               />
                             </div>
