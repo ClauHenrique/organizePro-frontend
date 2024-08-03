@@ -1,8 +1,10 @@
 import { api } from "./api";
-import { Task, UpdateTaskStatus } from "./types/tasks";
+import { Task, TaskStatus, UpdateTaskStatus } from "./types/tasks";
 
-export async function getTaskService(token: string | any) {
-    return await api.get('/task', {
+export async function getTaskService(token: string | any, filter?: string) {
+    return await api.post('/task/findall', 
+        {status: filter? filter : TaskStatus.AFAZER },
+        {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -12,6 +14,15 @@ export async function getTaskService(token: string | any) {
 
 export async function getOneTaskService(token: string | any, taskId: string) {
     return await api.get(`/task/${taskId}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
+
+
+export async function deleteTaskService(token: string | any, taskId: string) {
+    return await api.delete(`/task/${taskId}`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }

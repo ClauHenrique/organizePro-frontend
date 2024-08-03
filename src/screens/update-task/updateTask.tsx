@@ -40,6 +40,8 @@ export default function UpdateTask() {
 
             
             if (up.status === 200) {
+                console.log(up);
+                
                 setTimeout(() => {
                     setshowMsgSucess(false);
                 }, 3000);
@@ -151,7 +153,7 @@ export default function UpdateTask() {
                         <option value={4}>Urgente</option>
                         <option value={5}>Crítica</option>
                     </select>
-                    <button type="submit" className="task-form-button">Cadastrar</button>
+                    <button type="submit" className="task-form-button">Atualizar</button>
                 </form>
             </div>
 

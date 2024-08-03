@@ -9,7 +9,8 @@ export type Task = {
 
 export enum TaskStatus {
     CONCLUIDA = 'concluida',
-    FAZENDO = 'fazendo'
+    FAZENDO = 'fazendo',
+    AFAZER = 'a fazer'
 }
 
 
