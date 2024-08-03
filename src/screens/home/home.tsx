@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
-import { getTaskService } from '../../services/task.service';
+import { deleteTaskService, getTaskService, updateTaskStatus } from '../../services/task.service';
 import './home.css';
 import  { Header, PriorityLevel, MsgError, NoContent, Footer } from '../importComponents';
+import { TaskStatus } from '../../services/types/tasks';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
 
+  let token = localStorage.getItem('token')
+
   const task = [
     { 
+      _id: '',
       title: '', 
       status: '', 
       description: '', 
@@ -16,11 +21,12 @@ export default function Home() {
     }
   ];
 
-  const [showErrorMsg, SetshowErrorMsg] = useState(false);
-  const [showNoContent, setShowNoContent] = useState(true);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [showNoContent, setShowNoContent] = useState(false);
   const [expandedItem, setExpandedItem] = useState(null);
   const [tasks, setTasks] = useState(task);
+  const [errorMsg, setErrorMsg] = useState({msg: '', show: false});
+  const navigate = useNavigate()
+
 
   const toggleExpand = (index: any) => {
     if (expandedItem === index) {
@@ -31,18 +37,14 @@ export default function Home() {
   };
 
 
-  const getTasks = async () => {
+  const getTasks = async (filterStatus?: string) => {
       try {
-
-        let token = localStorage.getItem('token')
-        
 
         if (token) {
 
-          let {data} = await getTaskService(token)
+          let {data} = await getTaskService(token, filterStatus)
          
           if (data.length > 0) {
-            setShowNoContent(false)
 
             data.map((ele: any) => {
               ele.startDate = new Date(ele.startDate).toLocaleString()
@@ -52,6 +54,10 @@ export default function Home() {
   
             setTasks(data) 
           } 
+
+          else {
+            setTasks(task)
+          }
         }
 
         else {
@@ -60,16 +66,64 @@ export default function Home() {
         
       } catch (error: any) {
 
+        setErrorMsg({
+          msg: "Estamos com algum erro no servidor. Não foi possivel obter as tarefas!",
+          show: true
+        })        
+
         if (error.response.status == 401) {
           localStorage.removeItem('token')
         }
 
-        else {
-
-          setErrorMsg("Estamos com algum erro no servidor. Não foi possivel obter as tarefas!")
-          SetshowErrorMsg(true)
-        }
       }
+  }
+
+  const filterTaskStatus = (event: any) => {
+
+    const filter = event.target.value
+
+    getTasks(filter)
+  }
+
+  const taskManagement = async (id: string, event: any) => {
+    try {
+
+      const newStatus = event.target.value;
+
+      switch (newStatus) {
+        case TaskStatus.FAZENDO:
+          await updateTaskStatus(
+            {status: TaskStatus.FAZENDO},
+             id,
+             token
+            )
+            window.location.reload()
+          break;
+        
+        case TaskStatus.CONCLUIDA:
+          await updateTaskStatus(
+            {status: TaskStatus.CONCLUIDA},
+            id,
+              token
+            )
+            window.location.reload()
+          break;
+
+        case 'modificar':
+          localStorage.setItem('idTaskUpdate', JSON.stringify(id));
+          navigate('/update-task')
+          break
+
+        case 'apagar':
+          await deleteTaskService(token, id)
+          window.location.reload()
+          break;
+      }
+
+
+    } catch (error) {
+      
+    }
   }
 
   useEffect(() => {
@@ -83,7 +137,7 @@ export default function Home() {
 
       <div className="main-home">
         {
-            showErrorMsg? <MsgError msgs={[errorMsg]} /> : null
+            errorMsg.show? <MsgError msgs={[errorMsg.msg]} /> : null
         }
 
         {
@@ -94,6 +148,16 @@ export default function Home() {
                   
             <div>
               <div id='task-list-container-home'>
+               
+              <select id='filter-task'
+                 onChange={(event) => 
+                  filterTaskStatus(event)}>
+                <option className='opaque-ft-70' value="a fazer" selected>a fazer</option>
+                <option className='opaque-ft-70' value="fazendo">fazendo</option>
+                <option className='opaque-ft-70' value="concluida">concluida</option>
+
+              </select>
+
                 <div id="task-list-header">
                   <div id="header-text-left">Tarefas cadastradas</div>
                   <div id="header-text-right">Status</div>
@@ -131,11 +195,15 @@ export default function Home() {
                               />
                             </div>
                           
-                            <select name="task-management" id='task-management'>
+                            <select 
+                              name="task-management" id='task-management' 
+                              onChange={(event) => 
+                                taskManagement(task._id, event)}>
                               <option className='opaque-ft-70' value="" disabled selected hidden>Gerenciar tarefa</option>
-                              <option className='opaque-ft-70' value="">Concluir tarfa</option>
-                              <option className='opaque-ft-70' value="">Alterar tarefa</option>
-                              <option className='opaque-ft-70' value="">apagar tarfa</option>
+                              <option className='opaque-ft-70' value="fazendo">Marcar como iniciada</option>
+                              <option className='opaque-ft-70' value="concluida">Marcar como concluida</option>
+                              <option className='opaque-ft-70' value="modificar">Modificar tarefa</option>
+                              <option className='opaque-ft-70' value="apagar">Apagar tarfa</option>
                             </select>
                           </div>
 
