@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './screens/home/home';
-import About from './screens/about';
+import About from './screens/about/about';
 import Login from './screens/login/login';
 import Register from './screens/register/register';
 import TaskForm from './screens/task-form/taskForm';
@@ -17,10 +17,10 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create-account" element={<Register />} />
-        <Route path="/task-form" element={<CheckAuthenticity><TaskForm /></CheckAuthenticity>} />        
-        <Route path="/sobre" element={<CheckAuthenticity><About /> </CheckAuthenticity>} />
-        <Route path="/manage-conflicts" element={<CheckAuthenticity><ManageConflicts /></CheckAuthenticity>} />
-        <Route path="/update-task" element={<CheckAuthenticity><UpdateTask /> </CheckAuthenticity>} />        
+        <Route path="/task-form" element={<CheckAuthenticity element={<TaskForm />} />} />        
+        <Route path="/sobre" element={<About />}/>
+        <Route path="/manage-conflicts" element={<CheckAuthenticity element={<ManageConflicts />} />} />
+        <Route path="/update-task" element={<CheckAuthenticity element={<UpdateTask />} />} />        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

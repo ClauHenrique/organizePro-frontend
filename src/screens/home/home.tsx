@@ -64,15 +64,18 @@ export default function Home() {
           setShowNoContent(true)
         }
         
-      } catch (error: any) {
-
-        setErrorMsg({
-          msg: "Estamos com algum erro no servidor. Não foi possivel obter as tarefas!",
-          show: true
-        })        
+      } catch (error: any) {    
 
         if (error.response.status == 401) {
           localStorage.removeItem('token')
+          window.location.reload()
+        }
+
+        else {
+          setErrorMsg({
+            msg: "Estamos com algum erro no servidor. Não foi possivel obter as tarefas!",
+            show: true
+          })    
         }
 
       }
