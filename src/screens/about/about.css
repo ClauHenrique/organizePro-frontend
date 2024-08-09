@@ -1,0 +1,36 @@
+#main-about {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#text-about {
+    margin-top: 1rem;
+    width: 70%;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.circle-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#img-profile {
+    width: 15rem; 
+    height: 15rem;
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 1px solid #ccc;
+    margin-bottom: 2rem;
+}
+
+.info {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
+}

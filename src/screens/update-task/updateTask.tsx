@@ -38,6 +38,9 @@ export default function UpdateTask() {
 
             const up = await updateTask(t, _id, token)
 
+            console.log(up);
+            
+
             
             if (up.status === 200) {
                 console.log(up);

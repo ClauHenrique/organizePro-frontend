@@ -1,13 +1,13 @@
 import { Navigate } from 'react-router-dom'
 
-export function CheckAuthenticity({element}: any) {
+export function CheckAuthenticity(props: {element: any}) {
   const token = localStorage.getItem('token');  
 
   if (!token) {
-    return Navigate({to: '/'})
+    return Navigate({to: '/login'})
   }
 
-  return element
+  return props.element
 
 };
 
