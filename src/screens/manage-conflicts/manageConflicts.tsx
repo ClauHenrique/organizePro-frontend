@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './manageConflicts.css';
 import { Footer, Header, MsgError, PriorityLevel } from '../importComponents';
-import { createTask, getTaskService, updateTask } from '../../services/task.service';
+import { createTask, getAllTaskService, getTaskService, updateTask } from '../../services/task.service';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,7 +40,7 @@ export default function ManageConflicts() {
     try {
       let token = localStorage.getItem('token');
       if (token) {
-        let { data } = await getTaskService(token);
+        let { data } = await getAllTaskService(token);
         if (data.length > 0) {
           data = data.map((ele: any) => ({
             ...ele,
