@@ -35,11 +35,11 @@ export default function PriorityLevel(props: priority) {
             <img src="/level.png" alt="Logo do OrganizePro" id="level-icon" />
             </div>
             <div id="levels">
-                <div id="level-1"></div>
-                <div id="level-2"></div>
-                <div id="level-3"></div>
-                <div id="level-4"></div>
-                <div id="level-5"></div>
+                <div id="level-1" className='lv'></div>
+                <div id="level-2" className='lv'></div>
+                <div id="level-3" className='lv'></div>
+                <div id="level-4" className='lv'></div>
+                <div id="level-5" className='lv'></div>
             </div>
         </div>
     )

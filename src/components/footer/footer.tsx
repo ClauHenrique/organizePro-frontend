@@ -9,23 +9,17 @@ export default function Footer() {
                   <Link to="/sobre" className="header-links opaque-ft-50">Sobre</Link>
                 </li>
                 <li>
-                  <Link
-                    to="https://github.com/ClauHenrique/organizePro-backend/tree/main/docs" 
-                    className="header-links opaque-ft-50"
-                    target='_blank'
-                    rel="noopener noreferrer"
-                    >Documentação
-                  </Link>
-                </li>
-                <li>
                   <Link 
-                    to="https://github.com/ClauHenrique/organizePro-backend" 
+                    to="https://github.com/ClauHenrique/" 
                     className="header-links opaque-ft-50"
                     target='_blank'
                     rel="noopener noreferrer"
                     >GitHub
                   </Link>
                 </li>
+                <li>
+                <p className='opaque-ft-50'>&#169; 2024 - Cláudio Henrique</p>
+              </li>
             </ul>
         </footer>
     );

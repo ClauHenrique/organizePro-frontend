@@ -11,20 +11,33 @@
 }
 
 #levels {
+    height: 1.5rem;
+
+    /* depois ajustar a largura de uma forma mais relativa */
+    width: 10rem;
     margin-left: 4px;
-    padding: 4px;
-    border: 1px solid #ddd; 
-    border-radius: 5px;
+    /* padding: 4px; */
+    border: 0px solid; 
+    border-radius: 20px;
 }
 
-#level-1 {
+.lv {
+    flex: 1;
+    height: 100%;
+    border: 1p solid green;
+}
+
+
+
+/* #level-1 {
     width: 12px;
     height: 12px;
     margin-left: 4px;
     border: 1px solid #ddd;
     background: #a3d9a3;
-}
+} */
 
+/*
 #level-2 {
     width: 12px;
     height: 14px;
@@ -51,4 +64,4 @@
     height: 20px;
     margin-left: 4px;
     border: 1px solid #ddd; 
-}
+} */
