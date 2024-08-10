@@ -12,6 +12,10 @@
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+#icon:hover {
+  opacity: 0.6;
+}
   
 /* Estilos para a navegação no header */
 .header .nav {

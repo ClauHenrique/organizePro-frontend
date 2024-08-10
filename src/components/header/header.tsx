@@ -33,13 +33,15 @@ export default function Header() {
           to="/task-form" 
           className="header-links opaque-ft-50"
           rel="noopener noreferrer"
-          >Cadastrar</Link>
+          >Agendar</Link>
 
-        <Link 
-          to="#" 
+        <Link
+          to="https://github.com/ClauHenrique/organizePro-backend/tree/main/docs" 
           className="header-links opaque-ft-50"
+          target='_blank'
           rel="noopener noreferrer"
-        >Estatisticas</Link>
+          >Documentação
+        </Link>
       </nav>
 
       <div className="right">
