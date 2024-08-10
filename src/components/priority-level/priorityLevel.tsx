@@ -9,20 +9,11 @@ export default function PriorityLevel(props: priority) {
 
     const defineLevel = () => {
 
-        const levelIntensity = [
-            '#a3d9a3',
-            'linear-gradient(to right, #ffffcc, #ffeb99)',
-            'linear-gradient(to right, #ffd9b3, #ffad99)',
-            'linear-gradient(to right, #ffcc99, #ff9966)',
-            '#ff6666',
-        ]
-        
-        for (let i = 1; i <= props.level; i++) {
-           let elem = document.getElementById(`level-${i}`)
-           if (elem) { 
-            elem.style.background = levelIntensity[i -1]
-         }
-        }
+        let level: any = document.getElementById('progress')
+
+        let percentage = (props.level/5) * 100
+
+        level.style.width = `${percentage}%`
     }
 
     useEffect(() => {
@@ -34,12 +25,12 @@ export default function PriorityLevel(props: priority) {
             <div id="level-icon-circle">
             <img src="/level.png" alt="Logo do OrganizePro" id="level-icon" />
             </div>
+
             <div id="levels">
-                <div id="level-1" className='lv'></div>
-                <div id="level-2" className='lv'></div>
-                <div id="level-3" className='lv'></div>
-                <div id="level-4" className='lv'></div>
-                <div id="level-5" className='lv'></div>
+                <progress value="0" max="1" id='progress'></progress>
+                <div id="ball">
+                    <span id="level-text" className='opaque-ft-50 font-default'>{props.level}</span>
+                </div>
             </div>
         </div>
     )
