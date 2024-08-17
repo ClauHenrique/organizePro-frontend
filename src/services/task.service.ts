@@ -11,6 +11,15 @@ export async function getTaskService(token: string | any, filter?: string) {
     })
 }
 
+export async function getAllTaskService(token: string) {
+    return await api.get('/task', 
+        {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
+
 
 export async function getOneTaskService(token: string | any, taskId: string) {
     return await api.get(`/task/${taskId}`, {
