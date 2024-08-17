@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './manageConflicts.css';
 import { Footer, Header, MsgError, PriorityLevel } from '../importComponents';
-import { createTask, getAllTaskService, getTaskService, updateTask } from '../../services/task.service';
+import { createTask, getAllTaskService, updateTask } from '../../services/task.service';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
 
