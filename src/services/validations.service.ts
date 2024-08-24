@@ -1,13 +1,13 @@
 
 // validar o campo de data-hora
-export function validateDateFields(startDate: any, endDate: any) {
+export function validateDateFields(startDate: any, endDate: any, opt?: {lowerStart: boolean}) {
     const start = new Date(startDate)
     const end = new Date(endDate)
     const now = new Date()
 
     if (end <= start) {
         throw new Error(`
-            A data de finalização da tarefa não pode ser inferior ou igual a data de início`)
+            A data de finalização da tarefa não pode ser inferior a data de início`)
     }
 
 
@@ -16,7 +16,7 @@ export function validateDateFields(startDate: any, endDate: any) {
 
     start.setMinutes(start.getMinutes() + 2)
     
-    if (start < now) {
+    if (start < now && !opt?.lowerStart) {
         throw new Error(`A data de início não pode ser inferior a data de agora`)
     }
 

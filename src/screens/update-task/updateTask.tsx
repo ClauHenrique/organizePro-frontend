@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './updateTask.css';
-import { Header, Footer, TimeConflict } from '../importComponents';
+import { Header, Footer, TimeConflict, MsgError } from '../importComponents';
 import MsgSucess from '../../components/mesages/msgSuccess';
 import { Task } from '../../services/types/tasks';
 import { getOneTaskService, updateTask } from '../../services/task.service';
+import { validateDateFields } from '../../services/validations.service';
 
 export default function UpdateTask() {
     const [task, setTask] = useState<Task | any>(null);
@@ -13,7 +14,8 @@ export default function UpdateTask() {
     const [endDate, setEndDate] = useState<any>(new Date());
     const [priority, setPriority] = useState(1);
 
-    const [showMsgError, setshowMsgError] = useState(false);
+    const [msgError, setMsgError] = useState({msg: "", show: false})
+    const [showMsgConflict, setShowMsgConflict] = useState(false);
     const [showMsgSucess, setshowMsgSucess] = useState(false);
 
     let token = localStorage.getItem('token');
@@ -21,6 +23,29 @@ export default function UpdateTask() {
 
     const handleUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        try {
+
+            validateDateFields(
+                startDate, 
+                endDate,  
+                {
+                    lowerStart: true // a data de inicio pode ser inferior a data de agora
+            })                       // o usuario pode estar atualizando uma tarefa que ja está em andamento
+    
+           } catch (error: any) {
+    
+                document.getElementsByClassName
+                setMsgError({msg: error.message, show: true})
+                window.scrollTo(0, 0);
+            
+                setTimeout(() => {
+                    setMsgError({msg: "", show: false})
+            }, 5000)
+    
+            return
+            
+           }    
 
         
         try {
@@ -46,7 +71,7 @@ export default function UpdateTask() {
                     setshowMsgSucess(false);
                 }, 3000);
 
-                setshowMsgError(false);
+                setShowMsgConflict(false);
                 setshowMsgSucess(true);
                 window.scrollTo(0, 0);
             }
@@ -56,7 +81,7 @@ export default function UpdateTask() {
         } catch (error: any) {
             
             if (error.response.status === 409) {
-                setshowMsgError(true);
+                setShowMsgConflict(true);
                 localStorage.removeItem('idTaskUpdate')
             }
             
@@ -78,7 +103,14 @@ export default function UpdateTask() {
             setTask(data);
             setTitle(data.title);
             setDescription(data.description);
+            
+
+            data.startDate = new Date(data.startDate)
+            data.startDate.setHours(data.startDate.getHours() - 3)
             setStartDate(new Date(data.startDate).toISOString().slice(0, 16));
+
+            data.endDate = new Date(data.endDate)
+            data.endDate.setHours(data.endDate.getHours() - 3)
             setEndDate(new Date(data.endDate).toISOString().slice(0, 16));
             setPriority(data.priority);
             
@@ -93,7 +125,9 @@ export default function UpdateTask() {
         <div>
             <Header />
 
-            {showMsgError ? <TimeConflict /> : null}
+            {showMsgConflict ? <TimeConflict /> : null}
+
+            {msgError ? <MsgError msgs={[msgError.msg]} /> : null}
 
             {showMsgSucess ? <MsgSucess msg="Tarefa Modificada" /> : null}
 

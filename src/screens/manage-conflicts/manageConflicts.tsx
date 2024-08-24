@@ -115,7 +115,7 @@ export default function ManageConflicts() {
     if (newTaskStorage) {
    
       const taskObj = JSON.parse(newTaskStorage)
-
+      
       taskObj.startDate = new Date(taskObj.startDate).toLocaleString()
       taskObj.endDate = new Date(taskObj.endDate).toLocaleString()
 
@@ -129,6 +129,7 @@ export default function ManageConflicts() {
   }, []);
 
   const openModal = (task: Task) => {
+
     setSelectedTask(task);
     setIsModalOpen(true);
   };
