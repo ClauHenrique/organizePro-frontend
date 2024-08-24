@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './taskForm.css';
-import { Header, Footer, TimeConflict } from '../importComponents';
+import { Header, Footer, TimeConflict, MsgError } from '../importComponents';
 import { createTask } from '../../services/task.service';
 import MsgSucess from '../../components/mesages/msgSuccess';
+import { validateDateFields } from '../../services/validations.service';
 
 export default function TaskForm() {
     const [title, setTitle] = useState('');
@@ -12,9 +13,28 @@ export default function TaskForm() {
     const [priority, setPriority] = useState(1);
     const [showMsgError, setshowMsgError] = useState(false);
     const [showMsgSucess, setshowMsgSucess] = useState(false);
+    const [msgError, setMsgError] = useState({msg: "", show: false})
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+       try {
+
+        validateDateFields(startDate, endDate)
+
+       } catch (error: any) {
+
+            document.getElementsByClassName
+            setMsgError({msg: error.message, show: true})
+            window.scrollTo(0, 0);
+        
+            setTimeout(() => {
+                setMsgError({msg: "", show: false})
+        }, 5000)
+
+        return
+        
+       }
 
         const newTask = { 
             title, 
@@ -62,15 +82,11 @@ export default function TaskForm() {
         <div>
             <Header />
 
-            {showMsgError ? (
-                <TimeConflict
-                    msg={
-                        `A tarefa que você está tentando cadastrar está em conflito com o horário de uma tarefa já agendada`
-                    }
-                />
-            ) : null}
+            {showMsgError ? <TimeConflict /> : null}
 
             {showMsgSucess ? <MsgSucess msg="Tarefa Cadastrada" /> : null}
+                
+            {msgError ? <MsgError msgs={[msgError.msg]} /> : null}
 
             <div className="task-form-container">
                 <form className="task-form" onSubmit={handleSubmit}>
