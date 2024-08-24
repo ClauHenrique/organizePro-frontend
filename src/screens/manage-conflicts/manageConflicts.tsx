@@ -4,6 +4,7 @@ import { Footer, Header, MsgError, PriorityLevel } from '../importComponents';
 import { createTask, getAllTaskService, updateTask } from '../../services/task.service';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
+import { validateDateFields } from '../../services/validations.service';
 
 interface Task {
   title: string;
@@ -29,7 +30,7 @@ export default function ManageConflicts() {
 
   const [newTask, setNewTask] = useState<Task | null>(null);
   const [errorServe, setErrorServe] = useState({show: false, msg: ''});
-  const [errorUpdate, SetErrorUpdate] = useState({show: false, msg: ''});
+  const [msgError, setMsgError] = useState({show: false, msg: ''});
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,6 +64,24 @@ export default function ManageConflicts() {
     try {
       let token = localStorage.getItem('token');
 
+      try {
+
+        validateDateFields(task.startDate, task.endDate)
+
+       } catch (error: any) {
+
+            document.getElementsByClassName
+            setMsgError({msg: error.message, show: true})
+            window.scrollTo(0, 0);
+        
+            setTimeout(() => {
+                setMsgError({msg: "", show: false})
+        }, 3000)
+
+        return
+        
+       }
+
       if (flag === "UPDATE") {
         const {_id} = task
 
@@ -82,7 +101,7 @@ export default function ManageConflicts() {
       navigate('/')
      
     } catch (error) {
-      SetErrorUpdate({
+      setMsgError({
         show: true,
         msg: `
           A tarefa que você está tentando cadastrar está em 
@@ -202,8 +221,8 @@ export default function ManageConflicts() {
           {selectedTask && (
             <div id='modal-form-container'>
               {
-                errorUpdate?
-                <MsgError msgs={[errorUpdate.msg]} />
+                msgError?
+                <MsgError msgs={[msgError.msg]} />
                 : null
               }
               <form id="modal-form">

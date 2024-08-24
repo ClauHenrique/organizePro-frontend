@@ -38,9 +38,6 @@ export default function UpdateTask() {
 
             const up = await updateTask(t, _id, token)
 
-            console.log(up);
-            
-
             
             if (up.status === 200) {
                 console.log(up);
@@ -96,13 +93,7 @@ export default function UpdateTask() {
         <div>
             <Header />
 
-            {showMsgError ? (
-                <TimeConflict
-                    msg={
-                        `A tarefa que você está tentando cadastrar está em conflito com o horário de uma tarefa já agendada`
-                    }
-                />
-            ) : null}
+            {showMsgError ? <TimeConflict /> : null}
 
             {showMsgSucess ? <MsgSucess msg="Tarefa Modificada" /> : null}
 
